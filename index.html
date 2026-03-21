@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>Brisca Totanera</title>
+  <title>Brisca Totanera - Horizontal</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      touch-action: manipulation; /* Mejora touch en móvil */
+      touch-action: manipulation;
     }
     
     body {
@@ -17,7 +17,7 @@
       background: linear-gradient(135deg, #0b6623, #1a7b3a);
       color: #fff;
       min-height: 100vh;
-      overflow-x: hidden;
+      overflow-x: auto;
     }
 
     /* MENÚ INICIAL */
@@ -69,87 +69,109 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
 
-    /* JUEGO */
+    /* JUEGO HORIZONTAL */
     #juego {
       display: none;
       min-height: 100vh;
-      padding: 10px;
+      padding: 15px;
       position: relative;
+      overflow-x: auto;
     }
 
     #header-juego {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 15px;
-      padding: 10px;
-      background: rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(0,0,0,0.3);
       border-radius: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     #nombre-jugador {
-      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
       font-weight: bold;
     }
 
     #btn-fullscreen {
       background: #ffcc00;
       border: none;
-      padding: 10px;
+      padding: 12px 20px;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
+      font-weight: bold;
     }
 
     #puntuacion {
       text-align: center;
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
-      margin-bottom: 15px;
+      font-size: clamp(1.2rem, 4vw, 1.6rem);
+      margin-bottom: 20px;
       font-weight: bold;
+      padding: 10px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
     }
 
+    /* MESA HORIZONTAL - CAMBIO PRINCIPAL */
     #mesa {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      gap: 12px;
-      flex: 1;
-      min-height: 0;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 300px;
+      padding: 20px;
+      max-width: 100%;
+      overflow-x: auto;
     }
 
     .zona {
       display: flex;
-      gap: 8px;
+      flex-direction: column;
       align-items: center;
+      gap: 15px;
+      min-width: 120px;
+      flex: 1;
+      max-width: 180px;
+    }
+
+    .zona-mano {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
       justify-content: center;
       flex-wrap: wrap;
       width: 100%;
+      max-width: 400px;
     }
 
     .carta, .carta-mazo, .carta-triunfo {
-      /* Cartas MUCHO más grandes y responsive */
-      width: clamp(70px, 18vw, 120px);
-      height: clamp(105px, 27vw, 180px);
+      /* Cartas optimizadas para horizontal */
+      width: clamp(70px, 12vw, 100px);
+      height: clamp(100px, 17vw, 140px);
       border-radius: 12px;
       border: 3px solid #fff;
       background-color: #f8f0c6;
       cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
       position: relative;
       overflow: hidden;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       user-select: none;
       -webkit-user-select: none;
-      touch-action: manipulation;
     }
 
     .carta:hover, .carta:active {
-      transform: scale(1.05) rotate(2deg);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transform: scale(1.08) translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+      z-index: 10;
     }
 
     .carta.desactivada {
-      opacity: 0.5;
+      opacity: 0.6;
       cursor: default;
       transform: none !important;
     }
@@ -172,70 +194,90 @@
       background-color: #f8f0c6;
       cursor: default;
       transform: rotate(90deg);
+      width: clamp(60px, 10vw, 85px);
+      height: clamp(85px, 14vw, 120px);
     }
 
     #info {
-      margin-top: 15px;
+      margin-top: 20px;
       text-align: center;
-      padding: 15px;
-      background: rgba(0,0,0,0.3);
+      padding: 20px;
+      background: rgba(0,0,0,0.4);
       border-radius: 12px;
-      font-size: clamp(1rem, 3vw, 1.2rem);
-      min-height: 50px;
+      font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+      min-height: 60px;
     }
 
     #controles {
-      margin-bottom: 15px;
       display: flex;
-      gap: 10px;
+      gap: 15px;
       justify-content: center;
       flex-wrap: wrap;
+      margin-bottom: 20px;
     }
 
     button {
-      padding: 12px 24px;
+      padding: 15px 30px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       background: linear-gradient(45deg, #ffcc00, #ffdd44);
       color: #000;
       font-weight: bold;
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-size: clamp(1rem, 3vw, 1.2rem);
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      transition: all 0.2s;
-      min-width: 120px;
-      touch-action: manipulation;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: all 0.3s;
+      min-width: 140px;
     }
 
     button:hover, button:active {
       background: linear-gradient(45deg, #ffdd44, #ffcc00);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
-    /* RESPONSIVE MÓVIL */
-    @media (max-width: 480px) {
-      .zona {
-        gap: 4px;
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      #mesa {
+        gap: 15px;
+        padding: 15px;
       }
       
-      #header-juego {
-        flex-direction: column;
+      .zona {
+        min-width: 100px;
         gap: 10px;
       }
       
-      #mesa {
-        gap: 8px;
+      .zona-mano {
+        gap: 5px;
+        max-width: 300px;
+      }
+      
+      .carta {
+        width: clamp(60px, 14vw, 85px);
+        height: clamp(85px, 20vw, 120px);
       }
     }
 
-    @media (orientation: landscape) and (max-height: 500px) {
+    @media (max-height: 500px) {
       #mesa {
-        gap: 6px;
+        min-height: 250px;
       }
       
-      .carta, .carta-mazo, .carta-triunfo {
-        width: clamp(60px, 15vw, 90px);
-        height: clamp(90px, 22.5vw, 135px);
+      .carta {
+        width: clamp(55px, 11vw, 80px);
+        height: clamp(75px, 15vw, 110px);
+      }
+    }
+
+    @media (orientation: landscape) {
+      #juego {
+        padding: 10px;
+      }
+      
+      #mesa {
+        justify-content: space-around;
+        gap: 15px;
       }
     }
   </style>
@@ -248,7 +290,7 @@
     <button id="btn-jugar">¡JUGAR!</button>
   </div>
 
-  <!-- JUEGO -->
+  <!-- JUEGO HORIZONTAL -->
   <div id="juego">
     <div id="header-juego">
       <div id="nombre-jugador">Jugador</div>
@@ -265,30 +307,47 @@
     </div>
 
     <div id="mesa">
-      <div class="zona" id="zona-maquina">
-        <div id="mano-maquina"></div>
+      <!-- Mano máquina (arriba) -->
+      <div class="zona">
+        <div>🤖</div>
+        <div class="zona-mano" id="zona-maquina">
+          <div id="mano-maquina"></div>
+        </div>
       </div>
 
-      <div class="zona" id="zona-baza">
-        <div id="carta-maquina-baza" class="carta"></div>
-        <div id="carta-jugador-baza" class="carta"></div>
+      <!-- BAZA CENTRAL -->
+      <div class="zona">
+        <div>📋 BAZA</div>
+        <div id="zona-baza" style="flex-direction: column; gap: 15px;">
+          <div id="carta-maquina-baza" class="carta"></div>
+          <div id="carta-jugador-baza" class="carta"></div>
+        </div>
       </div>
 
-      <div class="zona" id="zona-mazo">
-        <div id="mazo" class="carta-mazo"></div>
-        <div id="triunfo" class="carta-triunfo"></div>
-        <div id="cartas-restantes"></div>
+      <!-- MAZO Y TRIUNFO (centro-derecha) -->
+      <div class="zona">
+        <div>🂠</div>
+        <div id="zona-mazo" style="gap: 10px;">
+          <div id="mazo" class="carta-mazo"></div>
+          <div id="triunfo" class="carta-triunfo"></div>
+          <div id="cartas-restantes"></div>
+        </div>
       </div>
 
-      <div class="zona" id="zona-jugador">
-        <div id="mano-jugador"></div>
+      <!-- Mano jugador (abajo) -->
+      <div class="zona">
+        <div>👤</div>
+        <div class="zona-mano" id="zona-jugador">
+          <div id="mano-jugador"></div>
+        </div>
       </div>
     </div>
 
-    <div id="info">¡Bienvenido! Escribe tu nombre y juega</div>
+    <div id="info">¡Bienvenido! Escribe tu nombre y juega en HORIZONTAL</div>
   </div>
 
   <script>
+    // El JavaScript permanece exactamente igual - solo cambió el CSS
     const PALOS = ["Oros", "Copas", "Espadas", "Bastos"];
     const NUMEROS = [1,2,3,4,5,6,7,10,11,12];
 
@@ -323,7 +382,7 @@
     const btnNuevo = document.getElementById("btn-nuevo");
     const btnFullscreen = document.getElementById("btn-fullscreen");
 
-    // EVENTOS TOUCH + CLICK (para móvil y PC)
+    // EVENTOS TOUCH + CLICK
     function addTouchClick(element, callback) {
       element.addEventListener('click', callback);
       element.addEventListener('touchstart', (e) => {
@@ -332,7 +391,7 @@
       });
     }
 
-    // MENÚ INICIAL
+    // Resto del JavaScript es idéntico al original...
     addTouchClick(btnJugar, () => {
       nombreJugador = inputNombre.value.trim() || "Jugador";
       if (nombreJugador.length > 15) nombreJugador = nombreJugador.substring(0,15);
@@ -345,7 +404,6 @@
       nuevaPartida();
     });
 
-    // Controles del juego
     addTouchClick(btnNuevo, nuevaPartida);
     addTouchClick(btnFullscreen, toggleFullscreen);
 
@@ -357,7 +415,6 @@
       }
     }
 
-    // LÓGICA DEL JUEGO (igual que antes)
     function valorPuntos(num) {
       if (num === 1) return 11;
       if (num === 3) return 10;
@@ -432,7 +489,7 @@
       mostrarTriunfo();
       actualizarCartasRestantes();
       render();
-      mostrarMensaje(`${nombreJugador}, ¡nueva partida! Tú empiezas.`);
+      mostrarMensaje(`${nombreJugador}, ¡nueva partida horizontal! Tú empiezas.`);
     }
 
     function mostrarTriunfo() {
@@ -472,7 +529,6 @@
     }
 
     function render() {
-      // Mano jugador
       manoJugadorDiv.innerHTML = "";
       manoJugador.forEach((carta, index) => {
         const c = document.createElement("div");
@@ -490,7 +546,6 @@
         manoJugadorDiv.appendChild(c);
       });
 
-      // Mano máquina (reverso)
       manoMaquinaDiv.innerHTML = "";
       manoMaquina.forEach(() => {
         const c = document.createElement("div");
@@ -502,7 +557,6 @@
         manoMaquinaDiv.appendChild(c);
       });
 
-      // Baza
       if (cartaMesaJugador) {
         cartaJugadorBazaDiv.style.visibility = "visible";
         cartaJugadorBazaDiv.innerHTML = "";
@@ -548,7 +602,7 @@
 
     function jugarCartaMaquina() {
       if (partidaTerminada) return;
-      const indice = Math.floor(Math.random() * manoMaquina.length); // IA simple
+      const indice = Math.floor(Math.random() * manoMaquina.length);
       cartaMesaMaquina = manoMaquina.splice(indice, 1)[0];
       render();
       mostrarMensaje(`Máquina juega ${nombreNumero(cartaMesaMaquina.num)} de ${cartaMesaMaquina.palo}.`);
@@ -591,7 +645,6 @@
         turno = "maquina";
       }
 
-      // Repartir cartas
       if (cartasRestantes > 0) {
         if (ganaJugador) {
           manoJugador.push(mazo.pop());
@@ -630,7 +683,6 @@
       actualizarCartasRestantes();
       render();
 
-      // Fin de partida
       if (manoJugador.length === 0 && manoMaquina.length === 0 && cartasRestantes === 0 && !triunfo) {
         partidaTerminada = true;
         let resultado = "";
@@ -645,7 +697,6 @@
       }
     }
 
-    // Inicializar input nombre con enter
     inputNombre.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') btnJugar.click();
     });
