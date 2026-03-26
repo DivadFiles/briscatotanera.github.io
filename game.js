@@ -1,7 +1,7 @@
 // ========= CONFIGURACIÓN BÁSICA =========
 
 // Palos (puedes renombrar a tus palos personalizados)
-const PALOS = ["oros", "copas", "espadas", "bastos"];
+const PALOS = ["jamones", "pencas", "pechos", "bellotas"];
 
 // Valores de la baraja española sin 8 ni 9
 const VALORES = [1, 2, 3, 4, 5, 6, 7, 10, 11, 12];
@@ -74,7 +74,14 @@ function nombreCarta(c) {
 function rutaImagenCarta(carta) {
   // Ejemplo: img/1-oros.png, img/3-bastos.png, etc.
   // Cambia la ruta y nombres según tus archivos.
-  return `img/${carta.valor}-${carta.palo}.png`;
+ const nombreArchivo = `${carta.valor} de ${carta.palo}.png`;
+  return `img/${nombreArchivo}`;
+}
+
+// Ruta del DORSO de cualquier carta
+function rutaImagenDorso() {
+    //Ejemplo: "img/dorso brisca totanera.png"
+    return "img/dorso brisca totanera.png"
 }
 
 // ========= INICIO / REINICIO =========
@@ -133,6 +140,7 @@ function renderMazo() {
     mazoDiv.style.visibility = "hidden";
   } else {
     mazoDiv.style.visibility = "visible";
+    mazoDiv.style.backgroundImage = `url('${rutaImagenDorso()}')`;
   }
 }
 
