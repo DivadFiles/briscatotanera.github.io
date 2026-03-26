@@ -55,16 +55,16 @@ function puntosCarta(carta) {
 
 function nombreCarta(c) {
   const nombres = {
-    1: "As",
-    2: "Dos",
-    3: "Tres",
-    4: "Cuatro",
-    5: "Cinco",
-    6: "Seis",
-    7: "Siete",
-    10: "Sota",
-    11: "Caballo",
-    12: "Rey"
+    1: "1",
+    2: "2",
+    3: "3",
+    4: "4",
+    5: "5",
+    6: "6",
+    7: "7",
+    10: "10",
+    11: "11",
+    12: "12"
   };
   return `${nombres[c.valor]} de ${c.palo}`;
 }
