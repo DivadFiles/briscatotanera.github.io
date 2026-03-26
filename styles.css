@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #0b6623;
+  color: #fff;
+  text-align: center;
+}
+
+#app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#mesa {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+.zona-mesa, .zona-mazo {
+  flex: 1;
+}
+
+#mano-jugador {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.carta, .carta-mesa, .carta-reverso {
+  width: 90px;
+  height: 140px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  cursor: pointer;
+}
+
+.carta.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.carta-mesa {
+  margin: 0 auto;
+}
+
+.carta-reverso {
+  background-color: #004400;
+  border: 2px solid #fff;
+}
+
+#info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#mensaje {
+  min-height: 24px;
+  font-weight: bold;
+}
+
+button {
+  margin-top: 20px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
